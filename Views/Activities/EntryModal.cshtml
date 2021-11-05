@@ -1,0 +1,141 @@
+@model Entry
+
+@{
+    string modalTitle = ViewBag.idx == -1 ? "Add New Entry" : "Edit entry";
+}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">@modalTitle</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        @using (Html.BeginForm("ModalAction", "Activities", FormMethod.Post))
+        {
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="code" class="col-sm-2 col-form-label">Code</label>
+                        <div class="col-sm-10">
+
+                            <select name="code">
+                                
+                                @if (ViewBag.idx == -1)
+                                {
+                                    <option value="" disabled selected>Select code</option>
+                                }
+                                
+                                @foreach (var code in ViewBag.codes)
+                                { 
+                                    @if (ViewBag.idx != -1 && code == Model.Code)
+                                    {
+                                        <option value="@code" selected>@code</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@code">@code</option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="subcode" class="col-sm-2 col-form-label">Subcode</label>
+                        <div class="col-sm-10">
+
+                            @if (ViewBag.idx == -1)
+                            {
+                                @Html.TextBoxFor(m => m.Subcode, new{ onchange = "show(this);", placeholder = "Enter subcode"})
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Subcode, new { onchange = "show(this);", value = Model.Subcode})
+                            }
+                            <input type="hidden" name="selectedSurname" value=@ViewBag.selectedSurname />
+                            <input type="hidden" name="selectedDate" value=@ViewBag.selectedDate />
+
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="time" class="col-sm-2 col-form-label">Time</label>
+                        <div class="col-sm-10">
+
+                            @if (ViewBag.idx == -1)
+                            {
+                                @Html.TextBox("time", "",  new{ onchange = "show(this);", placeholder = "Enter time", type = "number"})
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Time, new { onchange = "show(this);", value = Model.Time})
+                            }
+                            <input type="hidden" name="selectedSurname" value=@ViewBag.selectedSurname />
+                            <input type="hidden" name="selectedDate" value=@ViewBag.selectedDate />
+
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="description" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+
+                            @if (ViewBag.idx == -1)
+                            {
+                                @Html.TextBoxFor(m => m.Description, new{ onchange = "show(this);", placeholder = "Enter description"})
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Description, new { onchange = "show(this);", value = Model.Description})
+                            }
+                            <input type="hidden" name="selectedSurname" value=@ViewBag.selectedSurname />
+                            <input type="hidden" name="selectedDate" value=@ViewBag.selectedDate />
+
+                        </div>
+                </div>
+
+            </div>
+
+            <input type="hidden" name="selectedSurname" value=@ViewBag.selectedSurname />
+            <input type="hidden" name="selectedDate" value=@ViewBag.selectedDate />
+            <input type="hidden" name="idx" value=@ViewBag.idx />
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" name="saveButton" id="saveButton" value="Save" class="btn btn-primary" disabled="disabled">
+            </div>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $('form').submit(function(e) {
+        $(':disabled').each(function(e) {
+            $(this).removeAttr('disabled');
+        })
+    });
+
+    (function() {
+        $('select').change(function() {
+
+            var empty = false;
+            $('select').each(function() {
+                if ($(this).val().startsWith('Select')) {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('#saveButton').attr('disabled', 'disabled');
+            } else {
+                $('#saveButton').removeAttr('disabled');
+            }
+        });
+    })()
+    function show(input){
+        $('#saveButton').removeAttr('disabled');
+    }
+</script>

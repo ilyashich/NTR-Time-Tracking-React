@@ -1,0 +1,270 @@
+@model Option
+@{
+    ViewBag.Title = "Activities panel";
+    ViewData["Title"] = "Activities panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Alert"] != null)
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        @TempData["Alert"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        @TempData["Success"]
+    </div>
+}
+
+<div class="row">
+    @using(Html.BeginForm("SelectSurname", "Activities", FormMethod.Post))
+    {
+        <div class="col">
+            @Html.DropDownListFor(model => model.SelectedSurname,
+                new SelectList(Model.Surnames),
+                new { @class="selectpicker", onchange="this.form.submit();" })
+            <input type="hidden" name="selectedDate" value=@Model.SelectedDate />
+            
+        </div>
+    }
+
+    @using(Html.BeginForm("SelectDate", "Activities", FormMethod.Post))
+    {
+        <div class="col">
+            @Html.EditorFor(model => model.SelectedDate, 
+                new {  htmlAttributes = new { onchange = "this.form.submit();" } })
+            <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+        </div>
+    }
+    
+    @using (Html.BeginForm("SubmitMonth", "Activities", FormMethod.Post))
+    {
+        <div class="col">
+            <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+            <input type="hidden" name="selectedDate" value=@Model.SelectedDate />
+            <button type="submit" class="btn btn-primary">Submit this month</button>
+        </div>
+    }
+    
+    <div class="col">
+        @{
+            int timeSum = 0;
+        }
+        
+        @foreach(var entry in @Model.Entries)
+        {
+            timeSum += entry.Time;
+        }
+        
+        <h5 style="margin-left: 15px">
+            Total submitted time for @Model.SelectedDate.ToString("dd.MM.yyyy"): @timeSum minutes
+        </h5>
+    </div>
+    
+</div>
+<div class="row">
+    <div style="margin-top: 10px" class="col-md-2">
+        <button href="" class="btn btn-primary" data-toggle="modal" data-target="#entryModal"
+                data-url='@(Url.Action("EntryModal", new {selectedSurname = Model.SelectedSurname, selectedDate = Model.SelectedDate, idx=-1}))'>
+            Add New Entry
+        </button>
+    </div>
+
+    @if (ViewBag.projects.Count > 0)
+    {
+        <div style="margin-top: 10px" class="col-md-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#summaryModal">Month Summary</button>
+        </div>
+    }
+    else
+    {
+        <div style="margin-top: 10px" class="col-md-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#summaryModal" disabled="disabled">Month Summary</button>
+        </div>
+    }
+
+    @if (ViewBag.accepted.Count > 0)
+    {
+        <div style="margin-top: 10px" class="col-md-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#projectsModal">Projects Summary</button>
+        </div>
+    }
+    else
+    {
+        <div style="margin-top: 10px" class="col-md-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#projectsModal" disabled="disabled">Projects Summary</button>
+        </div>
+    }
+</div>
+
+@for (int i =0; i < Model.Entries.Count; ++i)
+{
+    
+        <fieldset style="padding:30px; border:3px solid #4238ca; background:#f6f8ff;">
+            <legend>Activity</legend>
+            
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th scope="row">
+                        Code
+                    </th>
+                    <td>
+                        @Model.Entries[i].Code
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Subcode
+                    </th>
+                    <td>
+                        @Model.Entries[i].Subcode
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Time
+                    </th>
+                    <td>
+                        @Model.Entries[i].Time
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Description
+                    </th>
+                    <td>
+                        @Model.Entries[i].Description
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="row">
+                <div class="col">
+                    <button href="" class="btn btn-primary" data-toggle="modal" data-target="#entryModal"
+                            data-url='@(Url.Action("EntryModal", new {selectedSurname = Model.SelectedSurname, selectedDate = Model.SelectedDate, idx = i}))'>
+                        Edit
+                    </button>
+                </div>
+                
+                @using (Html.BeginForm("Delete", "Activities", FormMethod.Post))
+                {
+                    <div class="col">
+                        <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+                        <input type="hidden" name="selectedDate" value=@Model.SelectedDate />
+                        <button type="submit" name="deleteIdx" value="@i" class="btn btn-primary">Delete</button>
+                    </div>
+                }
+            </div>
+            
+        </fieldset>
+}
+
+<!-- Modal -->
+<div class="modal" id="entryModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel1"
+     aria-hidden="true">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Your @Model.SelectedDate.ToString("MMMM", System.Globalization.CultureInfo.InvariantCulture) @Model.SelectedDate.Year Projects Summary</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Project Name</th>
+                        <th scope="col">Time spent</th>
+                    </tr>
+                    </thead>
+                    @for (int i = 0; i < ViewBag.projects.Count; ++i)
+                    {
+                        <tbody>
+                        <tr>
+                            <th scope="row">
+                                @(i+1)
+                            </th>
+                            <td>
+                                @ViewBag.projects[i]
+                            </td>
+                            <td>
+                                @ViewBag.projectSum[i]
+                            </td>
+                        </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="projectsModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel3" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel3">You are working on these projects</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Project Name</th>
+                            <th scope="col">Time Accepted By Manager</th>
+                            <th scope="col">Project Manager</th>
+                        </tr>
+                    </thead>
+                    @for (int i =0; i < ViewBag.accepted.Count; ++i)
+                    {
+                        <tbody>
+                        <tr>
+                            <th scope="row">
+                                @(i+1)
+                            </th>
+                            <td>
+                                @ViewBag.accepted[i].Code
+                            </td>
+                            <td>
+                                @ViewBag.accepted[i].Time
+                            </td>
+                            <td>
+                                @ViewBag.managers[i]
+                            </td>
+                        </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <script type="text/javascript"> *@
+@*     $(document).ready(function () { *@
+@*         $("#summaryModal").modal('show'); *@
+@*     }); *@
+@* </script> *@
+
+
