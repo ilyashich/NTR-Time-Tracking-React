@@ -1,0 +1,228 @@
+@model ManageOption
+@{
+    ViewBag.Title = "Manage panel";
+    ViewData["Title"] = "Manage panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Alert"] != null)
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        @TempData["Alert"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        @TempData["Success"]
+    </div>
+}
+
+<h2>
+    Manage Your Projects
+</h2>
+
+<fieldset style="padding:20px; border:3px solid #4238ca; background:#f6f8ff; width: 500px; margin-top: 10px">
+    <legend>Select Your Project (Or Create One)</legend>
+    <div class="row">
+        @using (Html.BeginForm("SelectSurname", "Manage", FormMethod.Post))
+        {
+            <div class="col">
+                @Html.DropDownListFor(model => model.SelectedSurname,
+                    new SelectList(Model.Surnames),
+                    new { @class="selectpicker", onchange = "this.form.submit();"})
+                <input type="hidden" name="selectedMonth" value=@Model.SelectedMonth />
+                <input type="hidden" name="selectedYear" value=@Model.SelectedYear />
+            </div>
+        }
+    </div>
+
+    <div class="row" style="margin-top: 10px">
+        @using (Html.BeginForm("SelectProject", "Manage", FormMethod.Post))
+        {
+            <div class="col">
+                <select name="selectedProject" class="selectpicker" onchange="this.form.submit();">
+                    @if (Model.Projects.Count > 0)
+                    {
+                        @foreach (var project in Model.Projects)
+                        {
+                            @if (ViewBag.isActive)
+                            {
+                                @if (project == Model.SelectedProject)
+                                {
+                                    <option value=@project selected>@project (active)</option>
+                                }
+                                else
+                                {
+                                    <option value=@project>@project</option>
+                                }
+                            }
+                            else
+                            {
+                                @if (project == Model.SelectedProject)
+                                {
+                                    <option value=@project selected>@project (closed)</option>
+                                }
+                                else
+                                {
+                                    <option value=@project>@project</option>
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <option value="" disabled selected>You don't have projects, create one</option>
+                    }
+                </select>
+                @* @Html.DropDownListFor(model => model.SelectedProject, *@
+                @*     new SelectList(Model.Projects), *@
+                @*     new {@class = "selectpicker", onchange = "this.form.submit();"}) *@
+                <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+
+            </div>
+        }
+    </div>
+
+    <div class="row" style="margin-top: 10px">
+        @using (Html.BeginForm("SelectMonth", "Manage", FormMethod.Post))
+        {
+            <div class="col">
+                @Html.DropDownListFor(model => model.SelectedMonth,
+                    Enumerable.Range(1, 12).Select(i =>
+                        new SelectListItem
+                        {
+                            Value = i.ToString(),
+                            Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)
+                        }),
+                    new { @class="selectpicker", data_width="150px", onchange = "this.form.submit();"})
+                <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+                <input type="hidden" name="selectedProject" value=@Model.SelectedProject />
+                <input type="hidden" name="selectedYear" value=@Model.SelectedYear />
+            </div>
+        }
+
+        @using (Html.BeginForm("SelectYear", "Manage", FormMethod.Post))
+        {
+            <div class="col" style="margin-right: 10px">
+                @Html.DropDownListFor(model => model.SelectedYear,
+                    Enumerable.Range(2015, 11).Select(i =>
+                        new SelectListItem
+                        {
+                            Value = i.ToString(), 
+                            Text = i.ToString()
+                        }),
+                    new { @class="selectpicker", data_width="fit", onchange = "this.form.submit();"})
+                <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+                <input type="hidden" name="selectedProject" value=@Model.SelectedProject />
+                <input type="hidden" name="selectedMonth" value=@Model.SelectedMonth />
+            </div>
+        }
+        @using (Html.BeginForm("CloseProject", "Manage", FormMethod.Post))
+        {
+            <div class="col">
+                <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+                <input type="hidden" name="selectedMonth" value=@Model.SelectedMonth />
+                <input type="hidden" name="selectedYear" value=@Model.SelectedYear />
+                <input type="hidden" name="selectedProject" value=@Model.SelectedProject />
+                <button type="submit" class="btn btn-secondary">Close This Project</button>
+            </div>
+        }
+    </div>
+</fieldset>
+
+<div style="margin-top: 10px">
+    <button href="" class="btn btn-primary" data-toggle="modal" data-target="#CreateProjectModal"
+            data-url='@(Url.Action("CreateProjectModal", new {selectedSurname = Model.SelectedSurname, 
+                          selectedMonth = Model.SelectedMonth, selectedYear = Model.SelectedYear,
+                      selectedProject = Model.SelectedProject}))'>
+        Create New Project
+    </button>
+</div>
+
+@if (ViewBag.budget != null)
+{
+    <h4>
+        Current project budget: @ViewBag.budget
+    </h4>
+}
+
+@if (Model.SubmittedTime.Count > 0)
+{
+    @for (int i = 0; i < Model.ProjectWorkers.Count; ++i)
+    {
+
+        <fieldset style="padding:30px; border:3px solid #4238ca; background:#f6f8ff;">
+            <legend>Report</legend>
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th scope="row">
+                        Worker
+                    </th>
+                    <td>
+                        @Model.ProjectWorkers[i]
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Submitted Time
+                    </th>
+                    <td>
+                        @Model.SubmittedTime[i]
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Is Month Submitted
+                    </th>
+                    <td>
+                        @if (@Model.IsFrozen[i])
+                        {
+                            <div class="display-field">
+                                Yes
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="display-field">
+                                No
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Accepted Time
+                    </th>
+                    <td>
+                        @Model.AcceptedTime[i]
+                    </td>
+                </tr>
+
+            </table>
+            @using (Html.BeginForm("AcceptTime", "Manage", FormMethod.Post))
+            {
+
+                @Html.TextBox("time", @Model.AcceptedTime[i], new {onchange = "show(this);", type = "number"})
+                    
+                    <input type="hidden" name="selectedSurname" value=@Model.SelectedSurname />
+                    <input type="hidden" name="selectedMonth" value=@Model.SelectedMonth />
+                    <input type="hidden" name="selectedYear" value=@Model.SelectedYear />
+                    <input type="hidden" name="selectedProject" value=@Model.SelectedProject />
+                    <input type="hidden" name="worker" value=@Model.ProjectWorkers[i] />
+                    <input type="hidden" name="isMonthSubmitted" value=@Model.IsFrozen[i].ToString() />
+                    <input type="hidden" name="idx" value=@i />
+                    <button type="submit" class="btn btn-outline-primary">Edit Accepted Time</button>
+            }
+        </fieldset>
+    }
+}
+
+
+<!-- Modal -->
+<div class="modal" id="CreateProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+</div>
