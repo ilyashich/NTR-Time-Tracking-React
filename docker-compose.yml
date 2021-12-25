@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: NTR21Z
+      MYSQL_DATABASE: TimeReporterReact
     ports:
       - "3306:3306"
   phpmyadmin:
