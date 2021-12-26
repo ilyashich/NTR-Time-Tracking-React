@@ -12,7 +12,7 @@ to create database at port 3306 and phpmyadmin at port 8080
 
 ## Step 2: Populate database
 run `dotnet ef database update`
-to create database at port 3306 and phpmyadmin at port 8080
+to populate database with data
 
 ## Step 3: Publish application and it's dependencies for deployment
 run `dotnet publish -o %folder_name%`
