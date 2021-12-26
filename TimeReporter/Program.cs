@@ -19,14 +19,14 @@ builder.Services.AddDbContextPool<TimeReporterContext>(dbContextOptions =>
                 dbContextOptions.UseMySql(connectionString, serverVersion));
 
 builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                options.Cookie.SameSite = SameSiteMode.Strict;
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-                options.Cookie.Name = ".AspNetCore.Session.TimeReporter";
-            });
+{
+    options.Cookie.Name = ".TimeReporter.Session";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddHttpContextAccessor();
 
@@ -48,6 +48,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseCookiePolicy();
 app.UseSession();
 
 app.MapControllerRoute(
