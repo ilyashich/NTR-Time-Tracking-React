@@ -18,7 +18,7 @@ to populate database with data
 
 ## Step 3: Publish application and it's dependencies for deployment
 run `dotnet publish -c Release`  
-to create a framework-dependent cross-platform binary for the project in the `/bin/Release/net6.0/publish` directory
+to create a framework-dependent cross-platform binary for the project in the `bin/Release/net6.0/publish/` directory
 
 ## Step 4: Run application
-cd to `/bin/Release/net6.0/publish` and run `./Timereporter`
+cd to `bin/Release/net6.0/publish/` and run `./Timereporter`
