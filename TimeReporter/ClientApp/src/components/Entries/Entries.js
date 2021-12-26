@@ -202,7 +202,7 @@ export default function Entries(){
                 <label htmlFor="date" className="col-auto">
                     <strong>Select Date</strong>
                 </label>
-                <div className="col-md-3">
+                <div className="col-md-4">
                     <input type='date' defaultValue={Moment(date).format('YYYY-MM-DD')} onChange={handleDateChange}/>
                 </div>
                 <div className="col">

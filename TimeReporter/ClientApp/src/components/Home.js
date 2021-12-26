@@ -8,7 +8,9 @@ export default function Home(){
             </div>
 
             <div className="text-center">
-                <Link to='/entries'>Entries</Link>
+                <Link to='/entries'>
+                    <h4>Entries</h4>
+                </Link>
             </div>
         </div>
     )

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using TimeReporter.Models;
 
@@ -10,6 +11,9 @@ builder.Services.AddControllersWithViews()
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
+
 
 var connectionString = "server=localhost;port=3306;user=root;password=root;database=TimeReporterReact";
 
@@ -30,10 +34,6 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddMemoryCache();
-
-builder.Services.AddMvc();
-
 
 var app = builder.Build();
 
@@ -47,6 +47,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseCookiePolicy();
 app.UseSession();

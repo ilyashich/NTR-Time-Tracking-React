@@ -22,10 +22,10 @@ export default function EntryDayProgress( {totalSum} ){
     return(
         <div className="row">
             <div className="col-auto">
-                <strong>Your daily progress</strong>
+                <h4>Your day progress</h4>
             </div>
-            <div className="col-md-5">
-                <OverlayTrigger placement="right" overlay={popover}>
+            <div className="col-md-7">
+                <OverlayTrigger placement="bottom-start" overlay={popover}>
                     <ProgressBar id="progress" animated now={progress} label={Math.round(progress) + "%"}/>
                 </OverlayTrigger>
             </div>
