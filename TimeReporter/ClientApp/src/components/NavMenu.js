@@ -34,7 +34,7 @@ export default function NavMenu() {
             <NavLink tag={Link} className="text-dark" to="/home">Home</NavLink>
           </NavItem>
           <NavItem>
-              <NavLink tag={Link} className="text-dark" to="/entries">Activities</NavLink>
+              <NavLink tag={Link} className="text-dark" to="/entries">Entries</NavLink>
           </NavItem>
         </ul>
         <div className="col-auto">

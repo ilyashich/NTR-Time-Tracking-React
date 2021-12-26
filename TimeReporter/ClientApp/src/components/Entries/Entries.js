@@ -8,6 +8,7 @@ import DeleteEntry from "./DeleteEntry";
 import EntryDayProgress from "./EntryDayProgress";
 import Accepteds from "./Accepteds";
 import { Alert } from "react-bootstrap";
+import AllMonthEntries from "./AllMonthEntries";
 
 export default function Entries(){
 
@@ -218,6 +219,7 @@ export default function Entries(){
                           totalSum={totalSum}
                           report={report}
                           setError={setError} />
+                <AllMonthEntries selectedDate={Moment(date).format('YYYY-MM-DD')} report={report} />
                 <Accepteds selectedDate={Moment(date).format('YYYY-MM-DD')} report={report} />
             </div>
             {contents}
