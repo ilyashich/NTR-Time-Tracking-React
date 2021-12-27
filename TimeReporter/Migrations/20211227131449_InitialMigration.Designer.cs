@@ -11,7 +11,7 @@ using TimeReporter.Models;
 namespace TimeReporter.Migrations
 {
     [DbContext(typeof(TimeReporterContext))]
-    [Migration("20211215225433_InitialMigration")]
+    [Migration("20211227131449_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,7 @@ namespace TimeReporter.Migrations
                             AcceptedId = 4,
                             ActivityId = 2,
                             ReportId = 4,
-                            Time = 100,
+                            Time = 70,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
                         },
@@ -95,7 +95,7 @@ namespace TimeReporter.Migrations
                             AcceptedId = 5,
                             ActivityId = 8,
                             ReportId = 4,
-                            Time = 150,
+                            Time = 100,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
                         },
@@ -104,7 +104,7 @@ namespace TimeReporter.Migrations
                             AcceptedId = 6,
                             ActivityId = 7,
                             ReportId = 4,
-                            Time = 110,
+                            Time = 30,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
                         },
@@ -113,9 +113,27 @@ namespace TimeReporter.Migrations
                             AcceptedId = 7,
                             ActivityId = 5,
                             ReportId = 4,
-                            Time = 160,
+                            Time = 30,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
+                        },
+                        new
+                        {
+                            AcceptedId = 8,
+                            ActivityId = 3,
+                            ReportId = 8,
+                            Time = 70,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 8
+                        },
+                        new
+                        {
+                            AcceptedId = 9,
+                            ActivityId = 1,
+                            ReportId = 8,
+                            Time = 100,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 8
                         });
                 });
 
@@ -158,7 +176,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ActivityId = 1,
-                            Active = true,
+                            Active = false,
                             Budget = 115,
                             Code = "Mercury-1",
                             Name = "Mercury",
@@ -228,7 +246,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ActivityId = 8,
-                            Active = true,
+                            Active = false,
                             Budget = 150,
                             Code = "Neptune-7",
                             Name = "Neptune",
@@ -306,10 +324,10 @@ namespace TimeReporter.Migrations
                         {
                             EntryId = 1,
                             ActivityId = 2,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "created table",
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "created view",
                             ReportId = 1,
-                            SubactivityId = 2,
+                            SubactivityId = 5,
                             Time = 70,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 1
@@ -318,10 +336,9 @@ namespace TimeReporter.Migrations
                         {
                             EntryId = 2,
                             ActivityId = 7,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "tea time",
                             ReportId = 1,
-                            SubactivityId = 7,
                             Time = 150,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 1
@@ -330,10 +347,10 @@ namespace TimeReporter.Migrations
                         {
                             EntryId = 3,
                             ActivityId = 3,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "added row",
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "edited model",
                             ReportId = 1,
-                            SubactivityId = 3,
+                            SubactivityId = 9,
                             Time = 30,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 1
@@ -342,10 +359,10 @@ namespace TimeReporter.Migrations
                         {
                             EntryId = 4,
                             ActivityId = 2,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "edited row",
                             ReportId = 4,
-                            SubactivityId = 2,
+                            SubactivityId = 4,
                             Time = 70,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
@@ -354,10 +371,10 @@ namespace TimeReporter.Migrations
                         {
                             EntryId = 5,
                             ActivityId = 8,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "added column",
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "added button",
                             ReportId = 4,
-                            SubactivityId = 8,
+                            SubactivityId = 23,
                             Time = 150,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
@@ -366,10 +383,9 @@ namespace TimeReporter.Migrations
                         {
                             EntryId = 6,
                             ActivityId = 7,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "resting",
                             ReportId = 4,
-                            SubactivityId = 7,
                             Time = 30,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
@@ -378,10 +394,10 @@ namespace TimeReporter.Migrations
                         {
                             EntryId = 7,
                             ActivityId = 5,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "created table",
+                            Date = new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "modified controller",
                             ReportId = 4,
-                            SubactivityId = 5,
+                            SubactivityId = 15,
                             Time = 30,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
@@ -389,14 +405,95 @@ namespace TimeReporter.Migrations
                         new
                         {
                             EntryId = 8,
+                            ActivityId = 5,
+                            Date = new DateTime(2021, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "created view",
+                            ReportId = 4,
+                            SubactivityId = 14,
+                            Time = 150,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 4
+                        },
+                        new
+                        {
+                            EntryId = 9,
                             ActivityId = 3,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "created table",
                             ReportId = 8,
-                            SubactivityId = 3,
+                            SubactivityId = 7,
                             Time = 70,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 8
+                        },
+                        new
+                        {
+                            EntryId = 10,
+                            ActivityId = 1,
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "modified view",
+                            ReportId = 8,
+                            SubactivityId = 2,
+                            Time = 120,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 8
+                        },
+                        new
+                        {
+                            EntryId = 11,
+                            ActivityId = 8,
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "tea time",
+                            ReportId = 10,
+                            Time = 15,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 10
+                        },
+                        new
+                        {
+                            EntryId = 12,
+                            ActivityId = 2,
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "celebrating",
+                            ReportId = 10,
+                            Time = 30,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 10
+                        },
+                        new
+                        {
+                            EntryId = 13,
+                            ActivityId = 9,
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "added view",
+                            ReportId = 10,
+                            SubactivityId = 26,
+                            Time = 130,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 10
+                        },
+                        new
+                        {
+                            EntryId = 14,
+                            ActivityId = 1,
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "modified view",
+                            ReportId = 10,
+                            SubactivityId = 2,
+                            Time = 80,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 10
+                        },
+                        new
+                        {
+                            EntryId = 15,
+                            ActivityId = 9,
+                            Date = new DateTime(2021, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "tea time",
+                            ReportId = 10,
+                            Time = 25,
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            WorkerId = 10
                         });
                 });
 
@@ -429,7 +526,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 1,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = true,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 1
@@ -437,7 +534,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 2,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = false,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 2
@@ -445,7 +542,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 3,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = false,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 3
@@ -453,7 +550,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 4,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = true,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 4
@@ -461,7 +558,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 5,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = false,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 5
@@ -469,7 +566,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 6,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = false,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 6
@@ -477,7 +574,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 7,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = false,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 7
@@ -485,15 +582,15 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 8,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
-                            Frozen = false,
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Frozen = true,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 8
                         },
                         new
                         {
                             ReportId = 9,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = false,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 9
@@ -501,7 +598,7 @@ namespace TimeReporter.Migrations
                         new
                         {
                             ReportId = 10,
-                            Date = new DateTime(2021, 12, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2021, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Frozen = false,
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkerId = 10
@@ -543,64 +640,183 @@ namespace TimeReporter.Migrations
                         new
                         {
                             SubactivityId = 2,
+                            ActivityId = 1,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 3,
+                            ActivityId = 1,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 4,
                             ActivityId = 2,
                             Code = "database",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 3,
+                            SubactivityId = 5,
+                            ActivityId = 2,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 6,
+                            ActivityId = 2,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 7,
                             ActivityId = 3,
                             Code = "database",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 4,
+                            SubactivityId = 8,
+                            ActivityId = 3,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 9,
+                            ActivityId = 3,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 10,
                             ActivityId = 4,
                             Code = "database",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 5,
+                            SubactivityId = 11,
+                            ActivityId = 4,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 12,
+                            ActivityId = 4,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 13,
                             ActivityId = 5,
                             Code = "database",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 6,
+                            SubactivityId = 14,
+                            ActivityId = 5,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 15,
+                            ActivityId = 5,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 16,
                             ActivityId = 6,
                             Code = "database",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 7,
-                            ActivityId = 7,
-                            Code = "",
+                            SubactivityId = 17,
+                            ActivityId = 6,
+                            Code = "frontend",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 8,
+                            SubactivityId = 18,
+                            ActivityId = 6,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 22,
                             ActivityId = 8,
                             Code = "database",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 9,
+                            SubactivityId = 23,
+                            ActivityId = 8,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 24,
+                            ActivityId = 8,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 25,
                             ActivityId = 9,
                             Code = "database",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            SubactivityId = 10,
+                            SubactivityId = 26,
+                            ActivityId = 9,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 27,
+                            ActivityId = 9,
+                            Code = "backend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 28,
                             ActivityId = 10,
                             Code = "database",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 29,
+                            ActivityId = 10,
+                            Code = "frontend",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            SubactivityId = 30,
+                            ActivityId = 10,
+                            Code = "backend",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
