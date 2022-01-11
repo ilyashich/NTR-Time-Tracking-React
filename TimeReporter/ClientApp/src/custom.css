@@ -1,0 +1,43 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+#login-select{
+  width: auto;
+  margin-bottom: 10px;
+}
+
+#add-new-user{
+  margin-top: 30px;
+}
+
+#new-user-input{
+  margin-bottom: 10px;
+}
+
+#placeholder-button{
+  width: 70px;
+}
+
+#login-button{
+  margin-left: 10px;
+}
+
+#no-day-entries{
+  margin-top: 50px;
+}
+
+#progress{
+  height: 38px;
+}
